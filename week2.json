@@ -1,0 +1,20 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Google's stock price over time.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/CPIAUCSL_PCH.csv"
+  },
+  "width": 350,
+  "height": 300,
+  "title": {"text": "USA inflation"},
+  "mark": {"type": "bar", "color": "#a83232"},
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "axis": {"title": " ", "grid": false}
+    },
+    "y": {"field": "value", "type": "quantitative"}
+  },
+  "config": {}
+}
