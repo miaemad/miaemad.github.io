@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+    "description": "Example. fixing issues with international number formats. This chart imports data from a .csv file with semicolons as the delimiter, instead of commas. We fix this by specifying the delimiter in the format property.",
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/jhellingsdata/jhellingsdata.github.io/refs/heads/main/examples/vega-lite/international-formats/sample-data/ex2.csv",
+      "format": {"type": "dsv", "delimiter": ";"}
+    },
+    "mark": {"type": "line"},
+    "encoding": {
+      "x": {"field": "date", "type": "temporal"},
+      "y": {"field": "value", "type": "quantitative"}
+    }
+  }
