@@ -101,9 +101,19 @@
         <figure id="pe_chart"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
 
-<div id="fertility-chart"></div>
 
-
+  <section>
+        <div class="chart-description">
+            <h2>Week 4: Charting with Python </h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
+                As a first example, we're using a basic chart from our repo.
+            </p>
+            <p>More text</p>
+        </div>
+        <figure id="CO2_Chart"></figure>
+        <figure id="Diaspora_chart"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
 
 
 
@@ -129,10 +139,9 @@
         vegaEmbed('#chart4', "week2.json")
 
         vegaEmbed("#pe_chart", "shiller_pe_ratio_chart.json")
+         vegaEmbed("#CO2_Chart", "week4_chart1.json")
+         vegaEmbed("#Diaspora_chart", "week4_diaspora.json")
 
-<script>
-  vegaEmbed("#fertility-chart", "fertility_chart.json");
-</script>
 
 
         // Do you want to add more graphs?

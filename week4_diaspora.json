@@ -1,0 +1,29 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/leb_diaspora.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "color": {"value": "#167335"},
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "axis": {"labelAngle": 0},
+      "sort": "-x",
+      "title": "Country of Destination"
+    },
+    "x": {
+      "field": "diaspora",
+      "axis": {"values": [1000000, 2000000]},
+      "type": "quantitative",
+      "title": "Diaspora"
+    }
+  },
+  "title": {
+    "text": "Lebanese Population in the Diaspora",
+    "subtitle": "Source: Wikipedia"
+  },
+  "config": {}
+}

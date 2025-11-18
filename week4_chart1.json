@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/wld;chn;kor;fra;gbr/indicator/EN.GHG.CO2.PC.CE.AR5?format=json&per_page=1000",
+    "format": {"property": "[1]"}
+  },
+  "width": 500,
+  "height": 350,
+  "mark": "line",
+  "title": {
+    "text": "CO2 Emissions per Capita",
+    "subtitle": "Source: World Bank"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "",
+      "axis": {"grid": false}
+    },
+    "y": {"field": "value", "type": "quantitative", "title": ""},
+    "color": {"field": "country.value", "legend": {"title": "Country"}}
+  },
+  "config": {}
+}
