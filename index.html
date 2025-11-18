@@ -101,6 +101,7 @@
         <figure id="pe_chart"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
 
+<div id="fertility-chart"></div>
 
 
 
@@ -128,6 +129,10 @@
         vegaEmbed('#chart4', "week2.json")
 
         vegaEmbed("#pe_chart", "shiller_pe_ratio_chart.json")
+
+<script>
+  vegaEmbed("#fertility-chart", "fertility_chart.json");
+</script>
 
 
         // Do you want to add more graphs?
