@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Stacked pageviews by device",
+  "width": 300,
+  "height": 300,
+  "data": {
+    "values": [
+      {"month": "Apr 2020", "device": "Desktop", "views": 12000},
+      {"month": "Apr 2020", "device": "Mobile", "views": 9000},
+      {"month": "May 2020", "device": "Desktop", "views": 11000},
+      {"month": "May 2020", "device": "Mobile", "views": 9500},
+      {"month": "Jun 2020", "device": "Desktop", "views": 13000},
+      {"month": "Jun 2020", "device": "Mobile", "views": 9500},
+      {"month": "Jul 2020", "device": "Desktop", "views": 18000},
+      {"month": "Jul 2020", "device": "Mobile", "views": 8000},
+      {"month": "Aug 2020", "device": "Desktop", "views": 13000},
+      {"month": "Aug 2020", "device": "Mobile", "views": 9500},
+      {"month": "Sep 2020", "device": "Desktop", "views": 12500},
+      {"month": "Sep 2020", "device": "Mobile", "views": 9500}
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "month", "type": "ordinal", "title": ""},
+    "y": {"field": "views", "type": "quantitative", "title": "Pageviews"},
+    "color": {
+      "field": "device",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Desktop", "Mobile"],
+        "range": ["#1f77b4", "#d4af37"]
+      }
+    }
+  },
+  "config": {}
+}
