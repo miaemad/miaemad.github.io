@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Global FDI flows resume with difficulty in 2024 (USD bn) – improved version",
+  "width": 600,
+  "height": 350,
+  "data": {
+    "values": [
+      {"year": "2014", "period": "First nine months", "value": 1200},
+      {"year": "2014", "period": "Last quarter", "value": 400},
+      {"year": "2015", "period": "First nine months", "value": 1200},
+      {"year": "2015", "period": "Last quarter", "value": 420},
+      {"year": "2016", "period": "First nine months", "value": 1550},
+      {"year": "2016", "period": "Last quarter", "value": 600},
+      {"year": "2017", "period": "First nine months", "value": 1400},
+      {"year": "2017", "period": "Last quarter", "value": 500},
+      {"year": "2018", "period": "First nine months", "value": 1000},
+      {"year": "2018", "period": "Last quarter", "value": 350},
+      {"year": "2019", "period": "First nine months", "value": 1020},
+      {"year": "2019", "period": "Last quarter", "value": 360},
+      {"year": "2020", "period": "First nine months", "value": 700},
+      {"year": "2020", "period": "Last quarter", "value": 200},
+      {"year": "2021", "period": "First nine months", "value": 1450},
+      {"year": "2021", "period": "Last quarter", "value": 550},
+      {"year": "2022", "period": "First nine months", "value": 1300},
+      {"year": "2022", "period": "Last quarter", "value": 260},
+      {"year": "2023", "period": "First nine months", "value": 1250},
+      {"year": "2023", "period": "Last quarter", "value": 300},
+      {"year": "2024", "period": "First nine months", "value": 1200},
+      {"year": "2024", "period": "Last quarter", "value": 150}
+    ]
+  },
+  "title": {
+    "text": "Global FDI flows resume with difficulty in 2024",
+    "subtitle": "Approximate values, in USD bn",
+    "anchor": "start",
+    "fontSize": 16
+  },
+  "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "",
+      "axis": {"labelAngle": 0}
+    },
+    "xOffset": {"field": "period"},
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "USD bn",
+      "axis": {"grid": true}
+    },
+    "color": {
+      "field": "period",
+      "type": "nominal",
+      "title": "",
+      "scale": {"range": ["#1f77b4", "#ffbf00"]}
+    },
+    "tooltip": [
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "period", "type": "nominal"},
+      {"field": "value", "type": "quantitative", "title": "USD bn"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFontSize": 11, "titleFontSize": 12},
+    "legend": {"orient": "top-right", "labelFontSize": 11}
+  }
+}

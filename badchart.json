@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Global FDI flows resume with difficulty in 2024 (USD bn) – mock data",
+  "width": 600,
+  "height": 350,
+  "data": {
+    "values": [
+      {"year": "2014", "period": "First nine months", "value": 1200},
+      {"year": "2014", "period": "Last quarter", "value": 400},
+      {"year": "2015", "period": "First nine months", "value": 1180},
+      {"year": "2015", "period": "Last quarter", "value": 420},
+      {"year": "2016", "period": "First nine months", "value": 1500},
+      {"year": "2016", "period": "Last quarter", "value": 600},
+      {"year": "2017", "period": "First nine months", "value": 1400},
+      {"year": "2017", "period": "Last quarter", "value": 500},
+      {"year": "2018", "period": "First nine months", "value": 1000},
+      {"year": "2018", "period": "Last quarter", "value": 350},
+      {"year": "2019", "period": "First nine months", "value": 1020},
+      {"year": "2019", "period": "Last quarter", "value": 360},
+      {"year": "2020", "period": "First nine months", "value": 700},
+      {"year": "2020", "period": "Last quarter", "value": 200},
+      {"year": "2021", "period": "First nine months", "value": 1450},
+      {"year": "2021", "period": "Last quarter", "value": 550},
+      {"year": "2022", "period": "First nine months", "value": 1300},
+      {"year": "2022", "period": "Last quarter", "value": 250},
+      {"year": "2023", "period": "First nine months", "value": 1150},
+      {"year": "2023", "period": "Last quarter", "value": 300},
+      {"year": "2024", "period": "First nine months", "value": 1200},
+      {"year": "2024", "period": "Last quarter", "value": 150}
+    ]
+  },
+  "mark": {"type": "bar"},
+  "encoding": {
+    "x": {"field": "year", "type": "ordinal", "title": ""},
+    "y": {
+      "aggregate": "sum",
+      "field": "value",
+      "type": "quantitative",
+      "title": "USD bn"
+    },
+    "color": {
+      "field": "period",
+      "type": "nominal",
+      "title": "",
+      "scale": {"range": ["#2E7EBB", "#F3C13A"]}
+    },
+    "tooltip": [
+      {"field": "year", "type": "ordinal"},
+      {"field": "period", "type": "nominal"},
+      {"field": "value", "type": "quantitative", "title": "Value (USD bn)"}
+    ]
+  },
+  "title": "Global FDI flows resume with difficulty in 2024 (USD bn)",
+  "config": {}
+}
