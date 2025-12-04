@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Immigration in Lebanon by Demographics",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/Lebanon-Net-Migration-Net-Change-in-Migration-2025-12-04-15-41.csv"
+  },
+  "width": 350,
+  "height": 300,
+  "title": {"text": "Lebanon Net Migration", "subtitle": "Source: Macrotrends"},
+  "config": {"view": {"stroke": "transparent"}},
+  "params": [
+    {
+      "name": "minYear",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2023,
+        "step": 1,
+        "name": "Start year:"
+      }
+    },
+    {
+      "name": "maxYear",
+      "value": 2023,
+      "bind": {
+        "input": "range",
+        "min": 2001,
+        "max": 2023,
+        "step": 1,
+        "name": "Max year:"
+      }
+    }
+  ],
+  "mark": {"type": "bar", "color": "rgb(128,0,0)"},
+  "transform": [
+    {"filter": "year(datum.Year) >= minYear"},
+    {"filter": "year(datum.Year) <= maxYear"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "Net Migration",
+      "axis": {"title": " ", "grid": false},
+      "type": "quantitative"
+    },
+    "x": {
+      "field": "Year",
+      "timeUnit": "year",
+      "type": "temporal",
+      "axis": {"title": " ", "grid": false}
+    },
+    "color": {
+      "condition": [{"test": "datum['Net Migration'] >0", "value": "green"}],
+      "value": "blue"
+    }
+  }
+}
