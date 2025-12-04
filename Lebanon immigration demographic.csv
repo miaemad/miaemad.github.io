@@ -1,0 +1,15 @@
+View,Group,Value
+Gender,Men,0.524
+Gender,Women,0.475
+Age,15-25,0.294
+Age,25-44,0.422
+Age,45-64,0.256
+Age,65 and above,0.028
+Governorate,Beirut,0.054
+Governorate,Mount Lebanon,0.423
+Governorate,North Lebanon,0.123
+Governorate,Akkar,0.046
+Governorate,Bekaa,0.086
+Governorate,Baalbek-Hermel,0.058
+Governorate,South Lebanon,0.132
+Governorate,Nabatieh,0.08
