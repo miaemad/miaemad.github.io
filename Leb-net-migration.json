@@ -51,7 +51,7 @@
     },
     "color": {
       "condition": [{"test": "datum['Net Migration'] >0", "value": "green"}],
-      "value": "blue"
+      "value": "#ED1C24"
     }
   }
 }
