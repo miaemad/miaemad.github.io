@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mia Emad - Portfolio</title>
+    
+    <!-- Vega-Lite for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .header-links {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        .header-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+        }
+
+        h3.subtitle {
+            color: #666;
+            font-weight: normal;
+            margin-top: 15px;
+        }
+
+        section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #333;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        figure {
+            margin: 20px 0;
+        }
+
+        .chart-description {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #chartGrid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .colab-link {
+            background-color: #f0f7ff;
+            padding: 10px 15px;
+            border-left: 4px solid #007bff;
+            margin: 15px 0;
+        }
+
+        .colab-link a {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Mia Emad</h1>
+        <div class="header-links">
+            <a href="https://www.linkedin.com/in/miaemad">LinkedIn</a> |
+            <a href="https://github.com/miaemad/miaemad.github.io">GitHub</a> |
+            <a href="test.html">Project</a>
+        </div>
+        <h3 class="subtitle">This page acts as my portfolio of charts for PP434.</h3>
+    </header>
+
+    <!-- Section 1: Hosting -->
+    <section>
+        <div class="chart-description">
+            <h2>CC1: Hosting - Display charts in your own site</h2>
+            <p>This section demonstrates how to host and embed charts from various sources, including external repositories and local files.</p>
+        </div>
+        <figure id="Location1"></figure>
+        <figure id="Location2"></figure>
+        <figure id="Location3"></figure>
+    </section>
+
+    <!-- Section 2: Building -->
+    <section>
+        <div class="chart-description">
+            <h2>CC2: Building - Create your own visualisations</h2>
+            <p>Creating custom visualisations using Vega-Lite to represent data in meaningful ways.</p>
+        </div>
+        <figure id="chart4"></figure>
+        <figure id="pe_chart"></figure>
+    </section>
+
+    <!-- Section 4: Replication -->
+    <section>
+        <div class="chart-description">
+            <h2>CC4: Replication - Recreate, then improve someone else's chart</h2>
+        </div>
+        
+        <h3>The Original Chart</h3>
+        <img src="image.png" alt="Original Chart" style="max-width: 850px; margin: 20px auto; display: block;">
+        
+        <h3>Replicated Chart (Before Improvements)</h3>
+        <figure id="Bad_Chart"></figure>
+        
+        <h3>Improved Chart</h3>
+        <figure id="Good_Chart"></figure>
+        
+        <p><strong>What I improved:</strong> I enhanced data clarity by adding grid lines, refined axis labels for better readability, improved the legend positioning, and modernised the colour scheme for professional presentation.</p>
+    </section>
+
+    <!-- Section 5: Accessing Data -->
+    <section>
+        <div class="chart-description">
+            <h2>CC5: Accessing Data - Scraper and API</h2>
+            <p>Demonstrating data collection through web scraping and API calls, followed by data cleaning and visualisation.</p>
+        </div>
+        
+        <h3>API Task: CO2 Emissions Data</h3>
+        <figure id="CO2_Chart"></figure>
+        <p>This visualisation is built using scraped data from The World Bank's live API. The data was collected using Python (pandas and requests), cleaned, and transformed into tidy (long) format.</p>
+        <p><strong>Source:</strong> <a href="https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5" target="_blank">World Bank - CO2 Emissions</a></p>
+        <p><strong>Base URL:</strong> https://api.worldbank.org/v2/</p>
+        <p><strong>API Structure:</strong> country/[country_codes]/indicator/[indicator_code]?format=json&per_page=[number]</p>
+        <p><strong>Final URL:</strong> https://api.worldbank.org/v2/country/wld;chn;kor;fra;gbr/indicator/EN.GHG.CO2.PC.CE.AR5?format=json&per_page=1000</p>
+        
+        <h3>Scraper Task: Lebanese Diaspora Data</h3>
+        <figure id="Diaspora_chart"></figure>
+        
+        <div class="colab-link">
+            <p>📓 <strong>Google Colab Notebook:</strong> <a href="YOUR_COLAB_LINK_HERE" target="_blank">View Data Scraping Code</a></p>
+            <!-- 👆 REPLACE "YOUR_COLAB_LINK_HERE" with your actual Colab link -->
+        </div>
+        
+        <p><strong>Source:</strong> <a href="https://en.wikipedia.org/wiki/Lebanese_diaspora" target="_blank">Wikipedia - Lebanese Diaspora</a></p>
+        <p><strong>Challenges:</strong> Cleaned the data by formatting the table to extract the first 15 countries, then removed text and symbols from the population column to retain only numerical values for accurate visualisation.</p>
+    </section>
+
+    <!-- Section 6: Loops Dashboard -->
+    <section>
+        <div class="chart-description">
+            <h2>CC6: Loops - Build a dashboard</h2>
+            <p>Using JavaScript loops to dynamically generate multiple charts from different data sources, creating an interactive dashboard of economic indicators for Lebanon.</p>
+        </div>
+        
+        <div class="colab-link">
+            <p>📓 <strong>Google Colab Notebook:</strong> <a href="YOUR_COLAB_LINK_HERE" target="_blank">View Batch Download Code</a></p>
+            <!-- 👆 REPLACE "YOUR_COLAB_LINK_HERE" with your actual Colab link -->
+        </div>
+        
+        <div id="chartGrid">
+            <figure id="loop1"></figure>
+            <figure id="loop2"></figure>
+            <figure id="loop3"></figure>
+            <figure id="loop4"></figure>
+            <figure id="loop5"></figure>
+            <figure id="loop6"></figure>
+        </div>
+    </section>
+
+    <!-- Section 7: Maps -->
+    <section>
+        <div class="chart-description">
+            <h2>CC7: Maps - Base maps and choropleths</h2>
+            <p>Creating geographical visualisations using base maps and choropleth techniques to represent spatial data.</p>
+        </div>
+        <figure id="Scotland_map"></figure>
+    </section>
+
+    <!-- Section 9: Interactive Charts -->
+    <section>
+        <div class="chart-description">
+            <h2>CC9: Two Interactive Charts</h2>
+            <p>Demonstrating interactivity in visualisations with tooltips, zooming, and dynamic data exploration capabilities for Lebanon migration data.</p>
+        </div>
+        <figure id="Leb-net-migration"></figure>
+        <figure id="Immigration-Lebanon"></figure>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Mia Emad | Data Visualisation Portfolio for PP434</p>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Section 1: Hosting charts
+        let figure_1_spec = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json";
+        let figure_2_spec = "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/wk1_chart1.json";
+        let figure_3_spec = "wk1_chart2.json";
+
+        vegaEmbed('#Location1', figure_1_spec);
+        vegaEmbed('#Location2', figure_2_spec);
+        vegaEmbed('#Location3', figure_3_spec);
+
+        // Section 2: Building
+        vegaEmbed('#chart4', "week2.json");
+        vegaEmbed("#pe_chart", "shiller_pe_ratio_chart.json");
+
+        // Section 4: Replication
+        vegaEmbed("#Bad_Chart", "badchart.json");
+        vegaEmbed("#Good_Chart", "goodchart.json");
+
+        // Section 5: Data access
+        vegaEmbed("#CO2_Chart", "week4_chart1.json");
+        vegaEmbed("#Diaspora_chart", "week4_diaspora.json");
+
+        // Section 7: Maps
+        vegaEmbed("#Scotland_map", "scotlandmapuni.json");
+
+        // Section 9: Interactive charts
+        vegaEmbed("#Leb-net-migration", "Leb-net-migration.json");
+        vegaEmbed("#Immigration-Lebanon", "Immigration-Lebanon.json");
+
+        // Section 6: Loops - Dynamic dashboard
+        indicators = [
+            "NY.GDP.MKTP.KD.ZG", 
+            "SM.POP.NETM", 
+            "SP.DYN.LE00.IN", 
+            "FP.CPI.TOTL.ZG", 
+            "DT.ODA.ODAT.GN.ZS", 
+            "SL.UEM.TOTL.ZS"
+        ];
+
+        subtitles = [
+            "Annual percentage change", 
+            "Net migration flow", 
+            "Years at birth", 
+            "Consumer price index", 
+            "% of GNI", 
+            "% of total labour force"
+        ];
+
+        Titles = [
+            "GDP Growth", 
+            "Net Migration", 
+            "Life Expectancy", 
+            "Inflation Rate", 
+            "Aid Received", 
+            "Unemployment"
+        ];
+
+        marks = ["line", "bar", "line", "line", "bar", "line"];
+
+        for (let i = 0; i < 6; i++) {
+            url = `https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/${indicators[i]}.json`;
+            id = "#loop" + (i + 1);
+
+            vegaEmbed(id, {
+                "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+                "description": "Economic indicator over time",
+                "data": { "url": url },
+                "mark": { "type": marks[i], "color": "orange" },
+                "encoding": {
+                    "x": {
+                        "field": "date",
+                        "type": "temporal",
+                        "title": "",
+                        "axis": { "domain": true, "grid": false, "ticks": false }
+                    },
+                    "y": { 
+                        "field": "value", 
+                        "type": "quantitative", 
+                        "title": "" 
+                    }
+                },
+                "title": { 
+                    "text": Titles[i], 
+                    "subtitle": subtitles[i] 
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

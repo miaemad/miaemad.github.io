@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Lebanese Populations in the Diaspora",
+  "width": 350,
+  "height": 450,
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/custom.geo.json",
+    "format": {"type": "json", "property": "features"}
+  },
+  "layer": [
+    {
+      "mark": {"type": "geoshape", "color": "rgba(0,0,0,0.1)"},
+      "transform": [{"filter": "datum.properties.sov_a3 != 'ATA'"}]
+    },
+    {
+      "transform": [
+        {
+          "lookup": "properties.sov_a3",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/leb_diaspora_for_map.csv"
+            },
+            "key": "iso3",
+            "fields": ["diaspora", "Country"]
+          }
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+      "encoding": {
+        "color": {
+          "field": "diaspora",
+          "type": "quantitative",
+          "scale": {"type": "sqrt", "scheme": "lightmulti"},
+          "title": "Diaspora"
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "diaspora", "type": "quantitative"}
+        ]
+      },
+      "projection": {"type": "mercator"}
+    }
+  ],
+  "config": {}
+}

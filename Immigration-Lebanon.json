@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Immigration in Lebanon by Demographics",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/Lebanon%20immigration%20demographic.csv"
+  },
+  "width": 350,
+  "height": 300,
+  "title": {
+    "text": "Immigration in Lebanon by Demographics, in percentages",
+    "subtitle": "Source: Lebanon Central Administration of Statistics (CAS)"
+  },
+  "transform": [{"filter": "datum.View == SelectParam"}],
+  "params": [
+    {
+      "name": "SelectParam",
+      "value": "Age",
+      "bind": {
+        "input": "select",
+        "options": ["Age", "Gender", "Governorate"],
+        "name": "Select series:"
+      }
+    }
+  ],
+  "mark": {"type": "bar", "color": "#3236a8"},
+  "encoding": {
+    "y": {
+      "field": "Group",
+      "axis": {
+        "title": " ",
+        "grid": false,
+        "labelAngle": 0,
+        "labelFontSize": 10
+      }
+    },
+    "x": {
+      "field": "Value",
+      "type": "quantitative",
+      "axis": {"title": " ", "grid": false, "format": ".0%"}
+    }
+  },
+  "config": {}
+}
