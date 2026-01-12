@@ -4,7 +4,7 @@
   "data": {
     "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/oecd.csv"
   },
-  "width": 600,
+  "width": 400,
   "height": 400,
   "title": {
     "text": "France Adult Unemployment Rate (25+ years)",
