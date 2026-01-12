@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Wales Unemployment by Local Authority (2020)",
+  "width": 350,
+  "height": 450,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/RADataHub/refs/heads/main/MappingWorkshop/geo_data/LAD_WLS_2025_05.topojson",
+    "format": {"type": "topojson", "feature": "object_name"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.LAD25CD",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/wales_with_codes.csv",
+          "format": {"type": "csv"}
+        },
+        "key": "Code",
+        "fields": ["Region", "Unemployment_2020"]
+      }
+    }
+  ],
+  "projection": {"type": "mercator"},
+  "mark": "geoshape",
+  "encoding": {
+    "color": {
+      "field": "Unemployment_2020",
+      "type": "quantitative",
+      "scale": {"scheme": "reds"},
+      "title": "Unemployment Rate (%)"
+    },
+    "tooltip": [
+      {"field": "Region", "type": "nominal", "title": "Local Authority"},
+      {
+        "field": "Unemployment_2020",
+        "type": "quantitative",
+        "title": "Unemployment Rate (%)"
+      }
+    ]
+  },
+  "config": {}
+}
