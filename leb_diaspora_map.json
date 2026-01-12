@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Lebanese Populations in the Diaspora",
   "width": 350,
-  "height": 450,
+  "height": 300,
   "data": {
     "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/custom.geo.json",
     "format": {"type": "json", "property": "features"}
