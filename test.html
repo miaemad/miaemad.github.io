@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebanon Migration - Mia Emad</title>
+    
+    <!-- Vega-Lite for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+
+        /* Lebanese Flag Image */
+        .flag-container {
+            text-align: center;
+            padding: 30px 0;
+            background-color: white;
+            margin-bottom: 0;
+        }
+
+        .flag-image {
+            width: 180px;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 0 20px 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #ED1C24;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #ED1C24;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .textbox {
+            background-color: #fff9f9;
+            padding: 20px;
+            border-left: 4px solid #ED1C24;
+            margin: 20px 0;
+        }
+
+        figure {
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+        }
+
+        a {
+            color: #ED1C24;
+        }
+
+        a:hover {
+            color: #b31419;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Lebanese Flag Image -->
+    <div class="flag-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Flag_of_Lebanon.svg/320px-Flag_of_Lebanon.svg.png" 
+             alt="Lebanese Flag" 
+             class="flag-image">
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        Mia Emad | 
+        <a href="https://www.linkedin.com/in/miaemad">LinkedIn</a> |
+        <a href="https://github.com/miaemad/miaemad.github.io">GitHub</a> |
+        <a href="testindex.html">Portfolio</a>
+    </nav>
+
+    <!-- Title -->
+    <section id="title">
+        <h1>Lebanon Migration</h1>
+        <p><em>An analysis of migration patterns, trends, and destinations</em></p>
+    </section>
+
+    <!-- 1. AIMS -->
+    <section id="aims">
+        <h2>1. Aims</h2>
+        <div class="textbox">
+            <p><strong>Project Goal:</strong> This project aims to examine migration in Lebanon, with a focus on factors, demographics, trends and destinations. The goal is to understand where Lebanese people have migrated, the scale of the diaspora, and key economic and social indicators that relate to migration patterns.</p>
+        </div>
+    </section>
+
+    <!-- 2. INTRO -->
+    <section id="intro">
+        <h2>2. Introduction</h2>
+        <div class="textbox">
+            <p>Lebanon has experienced significant migration patterns over the past decades, driven by economic instability, political challenges, and social factors. This project explores the Lebanese diaspora, examining where people have migrated and analysing key indicators such as GDP growth, net migration, life expectancy, inflation, aid received, and unemployment rates.</p>
+            
+            <p>Understanding these migration patterns is crucial for policy-making and for comprehending the broader socio-economic challenges facing Lebanon. This analysis combines demographic data with economic indicators to paint a comprehensive picture of migration trends.</p>
+        </div>
+    </section>
+
+    <!-- 3. KEY FINDINGS -->
+    <section id="findings">
+        <h2>3. Key Findings</h2>
+        
+        <div class="chart-container">
+            <h3>Lebanese Diaspora Distribution</h3>
+            <p>The following visualisations show where Lebanese people have immigrated and the scale of the diaspora around the world.</p>
+            <figure id="Diaspora_chart"></figure>
+            <figure id="Diaspora_map"></figure>
+        </div>
+
+        <div class="chart-container">
+            <h3>Migration Trends Over Time</h3>
+            <p>These interactive charts display net migration patterns and immigration flows to and from Lebanon.</p>
+            <figure id="Leb-net-migration"></figure>
+            <figure id="Immigration-Lebanon"></figure>
+        </div>
+
+        <div class="chart-container">
+            <h3>Economic and Social Indicators Dashboard</h3>
+            <p>A comprehensive view of key indicators that relate to migration patterns in Lebanon.</p>
+            <figure id="loop1"></figure>
+            <figure id="loop2"></figure>
+            <figure id="loop3"></figure>
+            <figure id="loop4"></figure>
+            <figure id="loop5"></figure>
+            <figure id="loop6"></figure>
+        </div>
+    </section>
+
+    <!-- 4. DATA & TOOLS -->
+    <section id="data-tools">
+        <h2>4. Data & Tools</h2>
+        
+        <div class="textbox">
+            <h3>Data Sources</h3>
+            <ul>
+                <li><strong>Lebanese Diaspora Data:</strong> Wikipedia - Lebanese diaspora statistics 
+                    (<a href="https://en.wikipedia.org/wiki/Lebanese_diaspora" target="_blank">source</a>)</li>
+                <li><strong>Economic Indicators:</strong> World Bank API data including GDP growth, net migration, life expectancy, inflation rate, aid received, and unemployment rates</li>
+                <li><strong>Migration Statistics:</strong> UN and World Bank migration databases</li>
+            </ul>
+
+            <h3>Data Collection & Access</h3>
+            <p>Data was accessed through multiple methods:</p>
+            <ul>
+                <li>Web scraping from Wikipedia for diaspora statistics</li>
+                <li>API calls to World Bank database for economic indicators</li>
+                <li>JSON files hosted on GitHub for chart rendering</li>
+            </ul>
+
+            <h3>Tools & Methodology</h3>
+            <p><strong>Visualisation:</strong> Vega-Lite was used for all interactive charts and maps, allowing for responsive and interactive data visualisation.</p>
+            
+            <p><strong>Data Processing:</strong> Data cleaning involved:</p>
+            <ul>
+                <li>Formatting tables to extract the top 15 destination countries</li>
+                <li>Removing text and symbols from numerical columns</li>
+                <li>Standardising data formats across different sources</li>
+                <li>Creating JSON files for each indicator for efficient chart rendering</li>
+            </ul>
+
+            <p><strong>Automation:</strong> A loop-based approach was used to generate multiple economic indicator charts dynamically, reducing code repetition and improving maintainability.</p>
+
+            <h3>Challenges & Solutions</h3>
+            <p><strong>Challenge:</strong> Data from Wikipedia contained mixed text and numbers in population columns.</p>
+            <p><strong>Solution:</strong> Cleaned the data by removing non-numeric characters and extracting only numerical values for accurate visualisation.</p>
+            
+            <p><strong>Challenge:</strong> Needed to create multiple similar charts for different economic indicators.</p>
+            <p><strong>Solution:</strong> Implemented a JavaScript loop to automatically generate charts from arrays of indicators, titles, and chart types.</p>
+        </div>
+    </section>
+
+    <!-- 5. CONCLUSION -->
+    <section id="conclusion">
+        <h2>5. Conclusion</h2>
+        <div class="textbox">
+            <h3>Main Findings</h3>
+            <p>This analysis reveals significant patterns in Lebanese migration, with a substantial diaspora distributed across multiple continents. The economic indicators show correlations between migration trends and factors such as economic instability, unemployment, and inflation.</p>
+
+            <h3>Key Insights</h3>
+            <ul>
+                <li>The Lebanese diaspora is widespread, with major populations in the Americas, Europe, and the Middle East</li>
+                <li>Economic indicators show significant volatility during periods of increased migration</li>
+                <li>Net migration data reveals consistent outflow patterns correlating with economic challenges</li>
+            </ul>
+
+            <h3>Implications</h3>
+            <p>Understanding these migration patterns is essential for policymakers addressing Lebanon's economic and social challenges. The data suggests that improving economic stability, employment opportunities, and inflation control could potentially reduce migration pressures.</p>
+
+            <h3>Limitations</h3>
+            <ul>
+                <li>Diaspora data may be incomplete or outdated for some countries</li>
+                <li>Economic indicators provide correlation but not causation</li>
+                <li>Some migration data may not capture informal or undocumented movements</li>
+            </ul>
+
+            <h3>Personal Takeaways</h3>
+            <p>This project enhanced my skills in data visualisation using Vega-Lite, web data collection, and creating dynamic charts through JavaScript loops. The process of cleaning and standardising data from multiple sources was challenging but valuable for understanding the importance of data quality in analysis.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Mia Emad | Data Visualisation Project</p>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Load individual charts
+        vegaEmbed("#Diaspora_chart", "week4_diaspora.json");
+        vegaEmbed("#Leb-net-migration", "Leb-net-migration.json");
+        vegaEmbed("#Immigration-Lebanon", "Immigration-Lebanon.json");
+        vegaEmbed("#Diaspora_map", "Diaspora_map.json");
+
+        // Dynamic chart generation for economic indicators
+        indicators = [
+            "NY.GDP.MKTP.KD.ZG", 
+            "SM.POP.NETM", 
+            "SP.DYN.LE00.IN", 
+            "FP.CPI.TOTL.ZG", 
+            "DT.ODA.ODAT.GN.ZS", 
+            "SL.UEM.TOTL.ZS"
+        ];
+
+        subtitles = [
+            "Annual percentage change", 
+            "Net migration flow", 
+            "Years at birth", 
+            "Consumer price index", 
+            "% of GNI", 
+            "% of total labour force"
+        ];
+
+        Titles = [
+            "GDP Growth", 
+            "Net Migration", 
+            "Life Expectancy", 
+            "Inflation Rate", 
+            "Aid Received", 
+            "Unemployment"
+        ];
+
+        marks = ["line", "bar", "line", "line", "bar", "line"];
+
+        for (let i = 0; i < 6; i++) {
+            url = `https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/${indicators[i]}.json`;
+            id = "#loop" + (i + 1);
+
+            vegaEmbed(id, {
+                "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+                "description": "Economic indicator over time",
+                "data": { "url": url },
+                "mark": { "type": marks[i], "color": "#ED1C24" },
+                "encoding": {
+                    "x": {
+                        "field": "date",
+                        "type": "temporal",
+                        "title": "",
+                        "axis": { "domain": true, "grid": false, "ticks": false }
+                    },
+                    "y": { 
+                        "field": "value", 
+                        "type": "quantitative", 
+                        "title": "" 
+                    }
+                },
+                "title": { 
+                    "text": Titles[i], 
+                    "subtitle": subtitles[i] 
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
