@@ -162,6 +162,19 @@
         <figure id="pe_chart"></figure>
     </section>
 
+     <!-- Section 3: Debate -->
+    <section>
+        <div class="chart-description">
+            <h2>CC3: Debate - Use a visualisation in policy commentary</h2>
+            <p>Youth unemployment in France consistently exceeds adult unemployment. Should France introduce differentiated minimum wage rates or targeted youth employment programs?</p>
+        </div>
+
+        <figure id="oecd1"></figure>
+        <figure id="oecd2"></figure>
+        
+        <p>Youth face unemployment rates consistently higher than adults throughout 2024, suggesting structural barriers beyond economic cycles affect young workers disproportionately.</p>
+    </section>
+
     <!-- Section 4: Replication -->
     <section>
         <div class="chart-description">
@@ -267,6 +280,10 @@
         // Section 2: Building
         vegaEmbed('#chart4', "week2.json");
         vegaEmbed("#pe_chart", "shiller_pe_ratio_chart.json");
+
+        // Section 3: Debate
+        vegaEmbed("#oecd1", "oecd1.json");
+        vegaEmbed("#oecd2", "oecd2.json");
 
         // Section 4: Replication
         vegaEmbed("#Bad_Chart", "badchart.json");
