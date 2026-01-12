@@ -50,7 +50,7 @@
       "axis": {"title": " ", "grid": false}
     },
     "color": {
-      "condition": [{"test": "datum['Net Migration'] >0", "value": "green"}],
+      "condition": [{"test": "datum['Net Migration'] >0", "value": "#00AA50"}],
       "value": "#ED1C24"
     }
   }
