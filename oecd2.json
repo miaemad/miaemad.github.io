@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "France Youth Unemployment Rate",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/OECD.SDD.TPS%2CDSD_LFS%40DF_IALFS_UNE_M%2C1.0%2BFRA..._Z.Y._T.Y_GE15..M.csv"
+  },
+  "width": 500,
+  "height": 350,
+  "title": {
+    "text": "France Youth Unemployment Rate (15-24 years)",
+    "subtitle": "Source: OECD",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "transform": [
+    {"calculate": "toDate(datum.TIME_PERIOD)", "as": "date"},
+    {"calculate": "toNumber(datum.OBS_VALUE)", "as": "value"}
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#a83232",
+        "strokeWidth": 3,
+        "point": {"filled": true, "size": 100}
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": "Date",
+          "axis": {"format": "%b %Y", "labelAngle": -45, "grid": false}
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Youth Unemployment Rate (%)",
+          "scale": {"domain": [7, 8], "nice": false},
+          "axis": {"format": ".1f"}
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "color": "#a83232"
+      },
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "value", "type": "quantitative"},
+        "tooltip": [
+          {
+            "field": "date",
+            "type": "temporal",
+            "title": "Date",
+            "format": "%B %Y"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Unemployment Rate",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
