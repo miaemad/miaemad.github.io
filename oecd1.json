@@ -1,0 +1,23 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Google's stock price over time.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/oecd.csv"
+  },
+  "width": 350,
+  "height": 300,
+  "title": {
+    "text": "France Unemployment Rate",
+    "subtitle": "Source: OECD, 25+ y.o"
+  },
+  "mark": {"type": "bar", "color": "#f39b04ed"},
+  "encoding": {
+    "x": {
+      "field": "TIME_PERIOD",
+      "type": "temporal",
+      "axis": {"title": " ", "grid": false}
+    },
+    "y": {"field": "OBS_VALUE", "type": "quantitative", "title": "Percentage "}
+  },
+  "config": {}
+}
