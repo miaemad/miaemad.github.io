@@ -5,8 +5,8 @@
     "fontSize": 18,
     "subtitleFontSize": 13
   },
-  "width": 350,
-  "height": 300,
+  "width": 400,
+  "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/custom.geo.json",
     "format": {"type": "json", "property": "features"}
