@@ -22,7 +22,7 @@
       }
     }
   ],
-  "mark": {"type": "bar", "color": "#3236a8"},
+  "mark": {"type": "bar", "color": "#ED1C24"},
   "encoding": {
     "y": {
       "field": "Group",
