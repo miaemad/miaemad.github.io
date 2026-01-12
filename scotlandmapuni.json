@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Universities in Scotland",
+  "width": 300,
+  "height": 400,
+  "projection": {
+    "type": "mercator",
+    "scale": 2000,
+    "center": [-4, 57],
+    "translate": [150, 200]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/RADataHub/refs/heads/main/MappingWorkshop/geo_data/scotland.topojson",
+        "format": {"type": "topojson", "feature": "data"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightsalmon",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/miaemad/miaemad.github.io/refs/heads/main/scottish_universities.csv"
+      },
+      "mark": "circle",
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "color": {"value": "red"},
+        "tooltip": {"field": "Name"}
+      }
+    }
+  ],
+  "config": {}
+}
