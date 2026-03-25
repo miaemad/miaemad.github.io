@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Participatory Mechanisms in Technology — Database</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1a1a18;
+    background: #fafaf8;
+  }
+
+  header {
+    background: #1a1a18;
+    color: #f5f0eb;
+    padding: 2.5rem 3rem 2rem;
+    border-bottom: 3px solid #185FA5;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    color: #b4b2a9;
+    font-style: italic;
+  }
+
+  header .meta {
+    margin-top: 1rem;
+    display: flex;
+    gap: 2rem;
+    font-size: 0.85rem;
+    color: #888780;
+  }
+
+  header .meta span strong {
+    color: #f5f0eb;
+    font-weight: normal;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+  }
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid #d3d1c7;
+  }
+
+  .controls label {
+    font-size: 0.8rem;
+    color: #5f5e5a;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 0.25rem;
+  }
+
+  select, input[type="text"] {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 0.875rem;
+    padding: 0.4rem 0.7rem;
+    border: 0.5px solid #b4b2a9;
+    background: #fff;
+    color: #1a1a18;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  select:focus, input[type="text"]:focus {
+    border-color: #185FA5;
+  }
+
+  input[type="text"] {
+    width: 220px;
+  }
+
+  .count {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #888780;
+    font-style: italic;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  thead th {
+    background: #1a1a18;
+    color: #f5f0eb;
+    font-weight: normal;
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    border-right: 0.5px solid #333;
+  }
+
+  thead th:last-child { border-right: none; }
+
+  thead th:hover { background: #2c2c2a; }
+
+  thead th .sort-arrow {
+    display: inline-block;
+    margin-left: 4px;
+    opacity: 0.4;
+    font-size: 0.7rem;
+  }
+
+  thead th.sorted .sort-arrow { opacity: 1; color: #185FA5; }
+
+  tbody tr {
+    border-bottom: 0.5px solid #e8e6e0;
+    transition: background 0.1s;
+  }
+
+  tbody tr:hover { background: #f0ede6; }
+  tbody tr:nth-child(even) { background: #f5f4f0; }
+  tbody tr:nth-child(even):hover { background: #eceae3; }
+
+  td {
+    padding: 0.6rem 0.85rem;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  td.case-name {
+    font-weight: bold;
+    font-size: 0.875rem;
+    min-width: 180px;
+    max-width: 220px;
+  }
+
+  td.description {
+    font-size: 0.82rem;
+    color: #444441;
+    min-width: 220px;
+    max-width: 280px;
+  }
+
+  td.narrow { white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .badge-platform  { background: #ddeaf7; color: #0c447c; }
+  .badge-ai        { background: #d4ede5; color: #085041; }
+  .badge-gaming    { background: #f5e0d6; color: #712b13; }
+  .badge-crypto    { background: #e8e6f8; color: #3c3489; }
+  .badge-cross     { background: #e8e6e0; color: #444441; }
+
+  .badge-yes       { background: #d4ede5; color: #085041; }
+  .badge-no        { background: #fce8e8; color: #791f1f; }
+  .badge-partial   { background: #faeeda; color: #633806; }
+  .badge-na        { background: #e8e6e0; color: #5f5e5a; }
+
+  .badge-active        { background: #d4ede5; color: #085041; }
+  .badge-discontinued  { background: #fce8e8; color: #791f1f; }
+  .badge-completed     { background: #e8e6e0; color: #444441; }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #888780;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding: 1.5rem 3rem;
+    border-top: 0.5px solid #d3d1c7;
+    font-size: 0.8rem;
+    color: #888780;
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .container { padding: 1rem; }
+    header { padding: 1.5rem 1rem; }
+    .controls { flex-direction: column; align-items: flex-start; }
+    input[type="text"] { width: 100%; }
+    table { font-size: 0.8rem; }
+    td, thead th { padding: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Participatory Mechanisms in the Technology Sector — Case Database</h1>
+  <p>Appendix to: <em>The Landscape of Participatory Mechanisms in the Technology Sector</em> · LSE MPA Capstone · March 2026</p>
+  <div class="meta">
+    <span><strong>15</strong> cases</span>
+    <span><strong>5</strong> sectors</span>
+    <span><strong>2008–2026</strong></span>
+    <span><strong>37</strong> variables coded per case</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="controls">
+    <label>Sector</label>
+    <select id="filterSector">
+      <option value="">All sectors</option>
+      <option value="Platform">Platform</option>
+      <option value="AI">AI</option>
+      <option value="Gaming">Gaming</option>
+      <option value="Crypto">Crypto</option>
+      <option value="Cross-sector">Cross-sector</option>
+    </select>
+
+    <label>Status</label>
+    <select id="filterStatus">
+      <option value="">All statuses</option>
+      <option value="Active">Active</option>
+      <option value="Completed">Completed</option>
+      <option value="Discontinued">Discontinued</option>
+    </select>
+
+    <label>Embedded</label>
+    <select id="filterEmbedded">
+      <option value="">Either</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <label>Implementation</label>
+    <select id="filterImpl">
+      <option value="">Either</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <label>Search</label>
+    <input type="text" id="search" placeholder="case name, company…">
+
+    <span class="count" id="countLabel">Showing 15 of 15 cases</span>
+  </div>
+
+  <table id="mainTable">
+    <thead>
+      <tr>
+        <th data-col="case">Case <span class="sort-arrow">↕</span></th>
+        <th data-col="company">Company <span class="sort-arrow">↕</span></th>
+        <th data-col="sector">Sector <span class="sort-arrow">↕</span></th>
+        <th data-col="type">Mechanism type <span class="sort-arrow">↕</span></th>
+        <th data-col="start">Start <span class="sort-arrow">↕</span></th>
+        <th data-col="status">Status <span class="sort-arrow">↕</span></th>
+        <th data-col="embedded">Embedded <span class="sort-arrow">↕</span></th>
+        <th data-col="recurring">Recurring <span class="sort-arrow">↕</span></th>
+        <th data-col="selection">Selection <span class="sort-arrow">↕</span></th>
+        <th data-col="agenda">Agenda ctrl <span class="sort-arrow">↕</span></th>
+        <th data-col="transparency">Response transp. <span class="sort-arrow">↕</span></th>
+        <th data-col="impl">Observable impl. <span class="sort-arrow">↕</span></th>
+        <th data-col="desc">Description <span class="sort-arrow">↕</span></th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div id="noResults" class="no-results" style="display:none;">No cases match the current filters.</div>
+
+</div>
+
+<footer>
+  Sources and full variable codings are documented in the database supplied with the report. Scores for the five design indicators (embedded, recurring, selection, agenda control, response transparency) follow the coding rules set out in Section 3.2 of the report. Observable implementation is coded as Yes where at least one specific, citable product feature, policy change, or organisational action is attributable to the mechanism.
+</footer>
+
+<script>
+const data = [
+  {
+    case: "EVE Online Council of Stellar Management",
+    company: "CCP Games",
+    sector: "Gaming",
+    type: "Elected player council",
+    start: 2008,
+    status: "Active",
+    embedded: "Yes",
+    recurring: "Yes",
+    selection: "Mixed (elections)",
+    agenda: "Yes",
+    transparency: "No",
+    impl: "Yes",
+    desc: "Player-elected advisory council operating since 2008; ten members elected annually, attending annual summits with developers in Reykjavík. Members sign NDAs and are embedded in CCP's Scrum workflow."
+  },
+  {
+    case: "Reddit Mod Council",
+    company: "Reddit",
+    sector: "Platform",
+    type: "Advisory council",
+    start: 2019,
+    status: "Active",
+    embedded: "No",
+    recurring: "Yes",
+    selection: "Purposive",
+    agenda: "Yes",
+    transparency: "No",
+    impl: "Yes",
+    desc: "Ongoing private forum where selected volunteer moderators preview features, provide feedback, and join Q&A sessions with Reddit executives."
+  },
+  {
+    case: "Meta Oversight Board",
+    company: "Meta",
+    sector: "Platform",
+    type: "Standing oversight board",
+    start: 2020,
+    status: "Active",
+    embedded: "Yes",
+    recurring: "Yes",
+    selection: "Purposive",
+    agenda: "Yes",
+    transparency: "Yes",
+    impl: "Yes",
+    desc: "Permanent independent body of ~20 appointed experts issuing binding content moderation decisions and non-binding policy recommendations for Facebook, Instagram, and Threads."
+  },
+  {
+    case: "Pilot Community Forum on Climate Misinformation",
+    company: "Meta",
+    sector: "Platform",
+    type: "Deliberative poll/forum",
+    start: 2022,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "No",
+    transparency: "No",
+    impl: "Yes",
+    desc: "2022 pilot with the Behavioural Insights Team; 257 Facebook users across five countries deliberated on how Meta should address misleading climate content. Yielded four action points implemented by Meta."
+  },
+  {
+    case: "Community Forum on Bullying & Harassment in the Metaverse",
+    company: "Meta",
+    sector: "Platform",
+    type: "Deliberative poll/forum",
+    start: 2022,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "No",
+    transparency: "No",
+    impl: "Yes",
+    desc: "First global Deliberative Poll (2022), run with Stanford DDL; 6,300+ participants from 32 countries deliberated on regulating VR harassment."
+  },
+  {
+    case: "World of Warcraft Community Council",
+    company: "Blizzard Entertainment",
+    sector: "Gaming",
+    type: "Advisory council",
+    start: 2021,
+    status: "Discontinued",
+    embedded: "No",
+    recurring: "Yes",
+    selection: "Purposive",
+    agenda: "Yes",
+    transparency: "No",
+    impl: "Yes",
+    desc: "Application-based feedback programme selecting ~100 players for a dedicated public forum and private Discord with developers. Launched 2021; developer engagement declined significantly by 2024."
+  },
+  {
+    case: "STELA",
+    company: "Google DeepMind",
+    sector: "AI",
+    type: "Community-centred focus groups",
+    start: 2022,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Purposive",
+    agenda: "No",
+    transparency: "No",
+    impl: "No",
+    desc: "2022–23 community-centred focus groups with four US marginalised communities, yielding 38 behavioural rules for conversational AI. Outputs published as academic contribution; product integration described as future work."
+  },
+  {
+    case: "BigCode Project Governance",
+    company: "HuggingFace / ServiceNow",
+    sector: "AI",
+    type: "Open research collaboration",
+    start: 2022,
+    status: "Active",
+    embedded: "Yes",
+    recurring: "Yes",
+    selection: "Open/self-selection",
+    agenda: "Yes",
+    transparency: "N/A",
+    impl: "Yes",
+    desc: "Open scientific collaboration (since 2022) governed by a steering committee and working groups; 1,200+ contributors across 62 countries contributing to data governance, model training, and release policies."
+  },
+  {
+    case: "Anthropic Collective Constitutional AI (CCAI)",
+    company: "Anthropic",
+    sector: "AI",
+    type: "Deliberative poll/forum",
+    start: 2023,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "Yes",
+    transparency: "No",
+    impl: "Yes",
+    desc: "2023 process in which ~1,000 US adults drafted behavioural principles for Claude via the Polis platform, used to fine-tune a model variant. One principle (disability rights) incorporated into Claude 3 model card."
+  },
+  {
+    case: "Community Forums on GenAI — Round 1",
+    company: "Meta",
+    sector: "Platform",
+    type: "Deliberative poll/forum",
+    start: 2023,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "No",
+    transparency: "Partial",
+    impl: "Yes",
+    desc: "2023 forum with Stanford DDL and BIT; 1,545 participants from Brazil, Germany, Spain, and the US deliberated on foundational principles for AI chatbot behaviour."
+  },
+  {
+    case: "Cosmos Hub Citizens' Assembly",
+    company: "Cosmos Hub / Interchain Foundation",
+    sector: "Crypto",
+    type: "Experimental deliberation",
+    start: 2023,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Mixed",
+    agenda: "Yes",
+    transparency: "No",
+    impl: "No",
+    desc: "2023 pilot sortition-based assembly of token holders deliberating on shared-security admission rules. Explicitly labelled a pilot; second session planned but delayed by grant suspension."
+  },
+  {
+    case: "Community Forums on GenAI — Round 2",
+    company: "Meta",
+    sector: "Platform",
+    type: "Deliberative poll/forum",
+    start: 2024,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "No",
+    transparency: "Partial",
+    impl: "No",
+    desc: "2024 follow-up forum with Stanford DDL; ~900 participants from India, Turkey, Nigeria, Saudi Arabia, and South Africa deliberated on AI agent personalisation trade-offs."
+  },
+  {
+    case: "Optimism Retro Funding 4 Deliberation",
+    company: "Optimism Collective / OP Labs",
+    sector: "Crypto",
+    type: "Experimental deliberation",
+    start: 2024,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Mixed",
+    agenda: "Yes",
+    transparency: "Yes",
+    impl: "Yes",
+    desc: "Experimental sortition process in which 50 randomly selected token-holder badgeholders deliberated on impact-measurement criteria for retroactive public goods funding."
+  },
+  {
+    case: "Cardano Constitutional Convention",
+    company: "Cardano / Intersect",
+    sector: "Crypto",
+    type: "Constitutional convention",
+    start: 2024,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Mixed (elected delegates)",
+    agenda: "Yes",
+    transparency: "N/A",
+    impl: "Yes",
+    desc: "Global constitutional convention (Buenos Aires + Nairobi, Dec 2024); 63 delegates elected through 65 global workshops drafted a governance constitution ratified on-chain in January 2025."
+  },
+  {
+    case: "Industry-Wide Deliberative Forum on AI Agents",
+    company: "Cohere, DoorDash, Meta, Microsoft, Oracle, PayPal",
+    sector: "Cross-sector",
+    type: "Deliberative poll/forum",
+    start: 2025,
+    status: "Completed",
+    embedded: "No",
+    recurring: "No",
+    selection: "Stratified/quota",
+    agenda: "No",
+    transparency: "No",
+    impl: "No",
+    desc: "2025 cross-company Deliberative Poll convened by Stanford DDL with six firms; 503 participants deliberated on norms for AI agent deployment."
+  }
+];
+
+const sectorClass = {
+  "Platform": "badge-platform",
+  "AI": "badge-ai",
+  "Gaming": "badge-gaming",
+  "Crypto": "badge-crypto",
+  "Cross-sector": "badge-cross"
+};
+
+const statusClass = {
+  "Active": "badge-active",
+  "Completed": "badge-completed",
+  "Discontinued": "badge-discontinued"
+};
+
+function yesnoBadge(val) {
+  if (val === "Yes") return `<span class="badge badge-yes">Yes</span>`;
+  if (val === "No")  return `<span class="badge badge-no">No</span>`;
+  if (val === "Partial") return `<span class="badge badge-partial">Partial</span>`;
+  if (val === "N/A") return `<span class="badge badge-na">N/A</span>`;
+  return val;
+}
+
+function implBadge(val) {
+  return val === "Yes"
+    ? `<span class="badge badge-yes">Yes</span>`
+    : `<span class="badge badge-no">No</span>`;
+}
+
+let sortCol = "start";
+let sortAsc = true;
+let filtered = [...data];
+
+function render() {
+  const body = document.getElementById("tableBody");
+  body.innerHTML = "";
+
+  if (filtered.length === 0) {
+    document.getElementById("noResults").style.display = "block";
+    document.getElementById("mainTable").style.display = "none";
+  } else {
+    document.getElementById("noResults").style.display = "none";
+    document.getElementById("mainTable").style.display = "table";
+    filtered.forEach(row => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="case-name">${row.case}</td>
+        <td class="narrow">${row.company}</td>
+        <td class="narrow"><span class="badge ${sectorClass[row.sector]}">${row.sector}</span></td>
+        <td style="min-width:140px;font-size:0.82rem;">${row.type}</td>
+        <td class="narrow">${row.start}</td>
+        <td class="narrow"><span class="badge ${statusClass[row.status]}">${row.status}</span></td>
+        <td class="narrow">${yesnoBadge(row.embedded)}</td>
+        <td class="narrow">${yesnoBadge(row.recurring)}</td>
+        <td style="min-width:130px;font-size:0.82rem;">${row.selection}</td>
+        <td class="narrow">${yesnoBadge(row.agenda)}</td>
+        <td class="narrow">${yesnoBadge(row.transparency)}</td>
+        <td class="narrow">${implBadge(row.impl)}</td>
+        <td class="description">${row.desc}</td>
+      `;
+      body.appendChild(tr);
+    });
+  }
+
+  document.getElementById("countLabel").textContent =
+    `Showing ${filtered.length} of ${data.length} cases`;
+}
+
+function applyFilters() {
+  const sector = document.getElementById("filterSector").value;
+  const status = document.getElementById("filterStatus").value;
+  const embedded = document.getElementById("filterEmbedded").value;
+  const impl = document.getElementById("filterImpl").value;
+  const search = document.getElementById("search").value.toLowerCase();
+
+  filtered = data.filter(row => {
+    if (sector && row.sector !== sector) return false;
+    if (status && row.status !== status) return false;
+    if (embedded && row.embedded !== embedded) return false;
+    if (impl && row.impl !== impl) return false;
+    if (search && !row.case.toLowerCase().includes(search) && !row.company.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  applySort();
+}
+
+function applySort() {
+  filtered.sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol];
+    if (typeof av === "number") return sortAsc ? av - bv : bv - av;
+    return sortAsc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+  render();
+  document.querySelectorAll("thead th").forEach(th => {
+    th.classList.toggle("sorted", th.dataset.col === sortCol);
+    const arrow = th.querySelector(".sort-arrow");
+    if (th.dataset.col === sortCol) arrow.textContent = sortAsc ? "↑" : "↓";
+    else arrow.textContent = "↕";
+  });
+}
+
+document.querySelectorAll("thead th[data-col]").forEach(th => {
+  th.addEventListener("click", () => {
+    if (sortCol === th.dataset.col) sortAsc = !sortAsc;
+    else { sortCol = th.dataset.col; sortAsc = true; }
+    applySort();
+  });
+});
+
+["filterSector","filterStatus","filterEmbedded","filterImpl","search"].forEach(id => {
+  document.getElementById(id).addEventListener("input", applyFilters);
+});
+
+applyFilters();
+</script>
+</body>
+</html>
